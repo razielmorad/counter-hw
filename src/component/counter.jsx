@@ -1,35 +1,34 @@
 import { useState } from "react";
 
-const Counter = (props) => {
-  const [counter , setCounter] = useState(0)
-  const add = () => setCounter((counter) => counter + 1);
-  const sub = () => setCounter((counter) => counter - 1);
+const Counter = ({
+  min = Number.MIN_SAFE_INTEGER,
+  max = Number.MAX_SAFE_INTEGER,
+  start = 0,
+  steps = 1,
+}) => {
+  const [counter, setCounter] = useState(start);
+  const add = () => {
+    if (counter + steps <= max) {
+      setCounter((counter) => counter + steps);
+    }
+  };
 
-  let newCounter = {
-    min :0 ,
-    max :0,
-    initial :0,
-    steps :0
-  }
-  return(
+  const sub = () => {
+    if (counter - steps >= min) {
+      setCounter((counter) => counter - steps);
+    }
+  };
+
+  return (
     <div>
       {counter}
-      <button  disabled={counter >= props.max} onClick={add}>add</button>
-      <button disabled={counter <= props.min} onClick={sub}>subtract</button> <br />
-      min
-      <input onInput={(e) => {newCounter.min = Number(e.target.value);console.log(newCounter) } } type="number" /> <br /> <br />
-      max
-      <input type="text" /> <br /> <br />
-      initial
-      <input type="text" /> <br /> <br />
-      steps
-      <input type="text" /> <br /> <br />
-      
+      <button disabled={counter >= max} onClick={add}>
+        add
+      </button>
+      <button disabled={counter <= min} onClick={sub}>
+        subtract
+      </button>
     </div>
-  )
-
- 
-
-    
+  );
 };
 export default Counter;

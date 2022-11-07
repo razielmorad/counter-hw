@@ -1,11 +1,11 @@
-import logo from "./logo.svg";
+
 import "./App.css";
 import Counter from "./component/counter";
 
 function App() {
   return (
     <div className="App">
-      <Counter min = {0} max={10}></Counter>
+  <Counter/>
 
     </div>
   );
